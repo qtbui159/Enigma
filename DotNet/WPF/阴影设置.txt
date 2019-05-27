@@ -1,0 +1,13 @@
+如何设置阴影
+
+将画好的内容放置在一个Grid中，单独设置Border，将原内容放入Grid中
+
+<Grid>
+	<Border Grid.Row="0" Grid.RowSpan="3" BorderThickness="1" BorderBrush="LightGray"
+                        CornerRadius="5">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="-90" ShadowDepth="0" BlurRadius="6"/>
+                    </Border.Effect>
+        </Border>
+
+	<Grid> //原内容Grid
