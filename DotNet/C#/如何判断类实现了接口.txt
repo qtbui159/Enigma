@@ -1,0 +1,12 @@
+如何判断类实现了接口
+
+利用反射
+
+interface IAdd{}
+
+class Add:IAdd{}
+
+Type interfaceType=typeof(IAdd);
+Type implementType=typeof(Add);
+
+interfaceType.IsAssignableFrom(implementType); //判断某类是否实现了某接口
