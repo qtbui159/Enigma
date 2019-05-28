@@ -1,0 +1,12 @@
+如何判断子类父类关系
+
+利用反射
+
+class parent{}
+
+class my:parent{}
+
+Type parentType=typeof(parent);
+Type myType=typeof(my);
+
+myType.IsSubclassOf(parentType); //判断my是parent的子类
