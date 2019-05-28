@@ -1,0 +1,76 @@
+如何让枚举值与单选框绑定
+
+利用转换器
+
+示例代码核心部分
+
+注意的是转换参数(ConverterParamter)必须与枚举值的名字一模一样
+
+<RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期一}">星期一</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期二}">星期二</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期三}">星期三</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期四}">星期四</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期五}">星期五</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期六}">星期六</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期天}">星期天</RadioButton>
+
+public enum Week
+    {
+        星期一 = 1,
+        星期二,
+        星期三,
+        星期四,
+        星期五,
+        星期六,
+        星期天,
+
+        未知 = -0x9999,
+    }
+
+    public class WeekConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null || value.GetType() != typeof(Week))
+            {
+                return false;
+            }
+            string tag = parameter as string;
+            if (string.IsNullOrWhiteSpace(tag))
+            {
+                return false;
+            }
+
+            Week week = (Week)value;
+            return week.ToString() == tag;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null || value.GetType() != typeof(bool))
+            {
+                return Week.未知;
+            }
+
+            bool val = (bool)value;
+            if (!val)
+            {
+                return Week.未知;
+            }
+
+            string tag = parameter.ToString();
+            if (string.IsNullOrWhiteSpace(tag))
+            {
+                return Week.未知;
+            }
+
+            return Enum.Parse(typeof(Week), tag);
+        }
+    }

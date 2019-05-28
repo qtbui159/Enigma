@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfApp8.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp8"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:WeekConverter x:Key="WeekConverter"/>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期一}">星期一</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期二}">星期二</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期三}">星期三</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期四}">星期四</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期五}">星期五</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期六}">星期六</RadioButton>
+            <RadioButton GroupName="星期" IsChecked="{Binding Week,Mode=TwoWay,Converter={StaticResource WeekConverter},
+                ConverterParameter=星期天}">星期天</RadioButton>
+
+            <Button Click="Button_Click">读取</Button>
+            <Button Click="Button2_Click">选中周天</Button>
+        </StackPanel>
+    </Grid>
+</Window>
