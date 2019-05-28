@@ -1,0 +1,57 @@
+如何读写App.config
+
+这里值得注意的是 读取一个不存在的键是会引发异常的
+特别是在客户端程序中，旧版本可能不存在新版本中的键，所以需要在读取的时候就进行默认值写入
+
+以下是我经常用的写法
+
+public static class AppSetting
+    {
+        private static Configuration m_Config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+        public static string 新版本设置
+        {
+            get => Read(nameof(新版本设置), "8848");
+            set => Write(nameof(新版本设置), value);
+        }
+
+        /// <summary>
+        /// 读取项，如果该项不存在，会按照传入的defaultValue加入该项
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        private static string Read(string key, string defaultValue)
+        {
+            try
+            {
+                if (!m_Config.AppSettings.Settings.AllKeys.Contains(key))
+                {
+                    m_Config.AppSettings.Settings.Add(key, defaultValue);
+                    m_Config.Save();
+                    ConfigurationManager.RefreshSection(nameof(Configuration.AppSettings));
+                }
+
+                return m_Config.AppSettings.Settings[key].Value;
+            }
+            catch (Exception ex)
+            {
+                //异常部分自己处理
+                return defaultValue;
+            }
+        }
+
+        private static void Write(string key, string value)
+        {
+            try
+            {
+                m_Config.AppSettings.Settings[key].Value = value;
+                m_Config.Save();
+                ConfigurationManager.RefreshSection(nameof(Configuration.AppSettings));
+            }
+            catch (Exception ex)
+            {
+                //异常部分自己处理
+            }
+        }
+    }
