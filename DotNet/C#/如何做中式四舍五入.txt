@@ -1,0 +1,29 @@
+如何做中式四舍五入
+
+利用现成代码
+
+/// <summary>
+/// 中国式四舍五入保留n位小数
+/// </summary>
+/// <param name="number">数字</param>
+/// <param name="decimals">保留的位数</param>
+/// <returns></returns>
+public static string Round(decimal number, int decimals)
+{
+	decimal t = Math.Round(number, decimals, MidpointRounding.AwayFromZero);
+	string pattern = "#0."+ new string('0', decimals);
+	return t.ToString(pattern);
+}
+
+/// <summary>
+/// 中国式四舍五入保留n位小数
+/// </summary>
+/// <param name="number">数字</param>
+/// <param name="decimals">保留的位数</param>
+/// <returns></returns>
+public static string Round(double number, int decimals)
+{
+	double t = Math.Round(number, decimals, MidpointRounding.AwayFromZero);
+	string pattern = "#0."+ new string('0', decimals);
+	return t.ToString(pattern);
+}
