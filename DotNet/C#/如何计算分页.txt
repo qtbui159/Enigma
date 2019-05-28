@@ -1,0 +1,70 @@
+如何计算分页
+
+假设现在已经有的参数，需要跳转的页数，每页需要显示的数据条数，总数据条数
+直接利用现成代码
+
+class PageInfo
+    {
+        private const int START_PAGE = 1;
+
+        /// <summary>
+        /// 当前页，从1开始
+        /// </summary>
+        public int Page { private set; get; }
+        /// <summary>
+        /// 总页数
+        /// </summary>
+        public int AllPage { get; set; }
+        /// <summary>
+        /// 每页数据条数
+        /// </summary>
+        public int RowCount { get; set; }
+
+        public PageInfo(int page, int rowCount, int allPage)
+        {
+            Page = page;
+            RowCount = rowCount;
+            AllPage = allPage;
+        }
+
+        /// <summary>
+        /// 计算分页
+        /// </summary>
+        /// <param name="turnToPage">需要跳转的页数</param>
+        /// <param name="rowCount">每页显示的数据条数</param>
+        /// <param name="totalRowCount">总共的数据条数</param>
+        /// <returns></returns>
+        public static PageInfo GetPage(int turnToPage, int rowCount, int totalRowCount)
+        {
+            if (turnToPage <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(turnToPage));
+            }
+            if (rowCount <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(rowCount));
+            }
+            if (totalRowCount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(totalRowCount));
+            }
+
+            if (totalRowCount == 0)
+            {
+                return new PageInfo(START_PAGE, rowCount, START_PAGE);
+            }
+
+            int allPage = totalRowCount / rowCount;
+            if (totalRowCount % rowCount != 0)
+            {
+                allPage++;
+            }
+
+            if (turnToPage > allPage)
+            {
+                turnToPage = allPage;
+            }
+
+            return new PageInfo(turnToPage, rowCount, allPage);
+        }
+    }
