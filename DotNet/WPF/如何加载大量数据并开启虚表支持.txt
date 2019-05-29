@@ -1,0 +1,15 @@
+如何加载大量数据并开启虚表支持
+
+加载大量数据到一个容器里，如果只是使用的默认的样式，是不需要做任何操作的，因为默认样式就支持虚表
+如果重绘了Item样式，那就需要做额外的步骤来开启虚表支持
+
+下面给出DataGrid的虚表支持代码，其他的大同小异
+
+<DataGrid
+	VirtualizingStackPanel.VirtualizationMode="Recycling" 
+	VirtualizingStackPanel.IsVirtualizing="True"
+        ScrollViewer.CanContentScroll="True">
+</DataGrid>
+
+
+ScrollViewer.CanContentScroll必须为True，这个需要单独注意
