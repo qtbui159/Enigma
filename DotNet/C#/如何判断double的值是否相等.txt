@@ -1,0 +1,11 @@
+如何判断double的值是否相等
+
+double由于不是精确计数，而是一种模糊计数手段，所有普通的==是不能用于double比较相等的
+但是可以用大于小于来比较大小，所以double的相等也是一种模糊的相等，取决于你对精度的需求
+如果有高精度的需求，用decimal来代替double是最好的办法
+
+public bool IsSame(double a, double b)
+        {
+            const double t = 1e-8; //10的-8次方
+            return Math.Abs(a - b) < t;
+        }
