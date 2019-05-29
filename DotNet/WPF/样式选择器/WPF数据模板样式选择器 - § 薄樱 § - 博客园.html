@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)https://www.cnblogs.com/CherryGhost/archive/2011/05/29/2062387.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>WPF数据模板样式选择器 - § 薄樱 § - 博客园</title>
+    <meta property="og:description" content="在使用数据模板样式选择器时，不能设置ItemContainerStyle的属性值，如果设置了该值，那么数据模板样式选择器会失去作用。在使用数据模板样式选择器时，首先要创建数据模板样式选择器对象，此对象">
+    <link type="text/css" rel="stylesheet" href="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/bundle-coffee.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/bundle-coffee-mobile.css">
+    <link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/CherryGhost/rss">
+    <link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/CherryGhost/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/CherryGhost/wlwmanifest.xml">
+    <script src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/amp4ads-host-v0.js.下载"></script><script src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/pubads_impl_rendering_2019052302.js.下载"></script><script async="" src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/encoder.js.下载"></script><script src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script>var currentBlogId=89833;var currentBlogApp='CherryGhost',cb_enable_mathjax=false;var isLogined=false;</script>
+    <script src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<link rel="preload" href="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/f.txt" as="script"><script type="text/javascript" src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/f.txt"></script><script src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/pubads_impl_2019052302.js.下载" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-33/html/container.html"></head>
+<body>
+<a name="top"></a>
+
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/CherryGhost/"><img id="blogLogo" src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/CherryGhost/">§ 薄樱 §……Design of paradise</a></h1>
+<h2>一曲镇魂</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/CherryGhost/">首页</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%26%23167%3B%20%E8%96%84%E6%A8%B1%20%26%23167%3B">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/CherryGhost/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/CherryGhost/rss"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/xml.gif" alt="订阅"></a></li>
+</ul>
+
+
+			<div class="blogStats">
+				
+				<div id="blog_stats">
+<!--done-->
+随笔- 29&nbsp;
+文章- 1&nbsp;
+评论- 146&nbsp;
+</div>
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		
+        <div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/CherryGhost/archive/2011/05/29/2062387.html">WPF数据模板样式选择器</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p>在使用数据模板样式选择器时，不能设置ItemContainerStyle的属性值，如果设置了该值，那么数据模板样式选择器会失去作用。</p>
+<p>在使用数据模板样式选择器时，首先要创建数据模板样式选择器对象，此对象要重写StyleSelector基类的SelectStyle方法，并在方法中返回相应的样式，CS代码如下：</p>
+
+<div class="cnblogs_code" style="width: 932px; height: 423px;"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><div><span style="color: #000000;">   </span><span style="color: #0000ff;">public</span><span style="color: #000000;">  </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ListViewItemStyleselector:StyleSelector<br>    {<br><br>        </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Style Style1 { </span><span style="color: #0000ff;">get</span><span style="color: #000000;">; </span><span style="color: #0000ff;">set</span><span style="color: #000000;">; } </span><span style="color: #008000;">//</span><span style="color: #008000;">这个可以换成背景色，边框色等等</span><span style="color: #008000;"><br></span><span style="color: #000000;"><br>        </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Style Style2 { </span><span style="color: #0000ff;">get</span><span style="color: #000000;">; </span><span style="color: #0000ff;">set</span><span style="color: #000000;">; }<br><br>        </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> </span><span style="color: #0000ff;">override</span><span style="color: #000000;"> Style  SelectStyle(</span><span style="color: #0000ff;">object</span><span style="color: #000000;"> item, System.Windows.DependencyObject container)<br>        {<br>             ListView listView</span><span style="color: #000000;">=</span><span style="color: #000000;">ItemsControlFromItemContainer(container) </span><span style="color: #0000ff;">as</span><span style="color: #000000;"> ListView;<br>             </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> index </span><span style="color: #000000;">=</span><span style="color: #000000;"> listView.ItemContainerGenerator.IndexFromContainer(container);<br>            </span><span style="color: #0000ff;">if</span><span style="color: #000000;">(index </span><span style="color: #000000;">%</span><span style="color: #000000;"> </span><span style="color: #800080;">2</span><span style="color: #000000;">==</span><span style="color: #800080;">0</span><span style="color: #000000;">)<br>            {<br>                 </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> Style1 ;<br>            }<br>            </span><span style="color: #0000ff;">else</span><span style="color: #000000;"><br>            {<br>               </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> Style2 ;<br>            }<br>          }<br>    }</span></div></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+
+<p>&nbsp;在创建完成数据模板样式选择器后，就可以在XAML中调用数据模板样式选择器了，代码如下：</p>
+
+<div class="cnblogs_code">
+<pre><div><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">ListView.ItemContainerStyleSelector</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>     </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">local:styleselector </span><span style="color: #ff0000;">Style1</span><span style="color: #0000ff;">="</span><span style="color: #808000;">{StaticResource style1}</span><span style="color: #0000ff;">"</span><span style="color: #ff0000;"> Style2</span><span style="color: #0000ff;">="</span><span style="color: #808000;">{StaticResource style2}</span><span style="color: #0000ff;">"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>     </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">local:styleselector</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br></span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">ListView.ItemContainerStyleSelector</span><span style="color: #0000ff;">&gt;</span></div></pre>
+</div>
+<p>&nbsp;示例中的两个样式XAML代码如下：</p>
+<div onclick="cnblogs_code_show(&#39;0c15ed31-44ff-4bbf-a971-c8ffb64f6863&#39;)" class="cnblogs_code"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/ContractedBlock.gif" class="code_img_closed" id="code_img_closed_0c15ed31-44ff-4bbf-a971-c8ffb64f6863" style="display: none;"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/ExpandedBlockStart.gif" onclick="cnblogs_code_hide(&#39;0c15ed31-44ff-4bbf-a971-c8ffb64f6863&#39;,event)" class="code_img_opened" id="code_img_opened_0c15ed31-44ff-4bbf-a971-c8ffb64f6863" style=""><span class="cnblogs_code_collapse" style="display: none;">View Code </span>
+<div class="cnblogs_code_hide" id="cnblogs_code_open_0c15ed31-44ff-4bbf-a971-c8ffb64f6863" style="display: block;"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><div><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Style </span><span style="color: #ff0000;">x:Key</span><span style="color: #0000ff;">="style1"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>    </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Setter </span><span style="color: #ff0000;">Property</span><span style="color: #0000ff;">="Control.Padding"</span><span style="color: #ff0000;"> Value</span><span style="color: #0000ff;">="0"</span><span style="color: #0000ff;">/&gt;</span><span style="color: #000000;"><br>    </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Setter </span><span style="color: #ff0000;">Property</span><span style="color: #0000ff;">="Control.Background"</span><span style="color: #ff0000;"> Value</span><span style="color: #0000ff;">="Chocolate"</span><span style="color: #0000ff;">/&gt;</span><span style="color: #000000;"><br>    </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Style.Triggers</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>        </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Trigger </span><span style="color: #ff0000;">Property</span><span style="color: #0000ff;">="ListBoxItem.IsSelected"</span><span style="color: #ff0000;"> Value</span><span style="color: #0000ff;">="True"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>            </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Setter </span><span style="color: #ff0000;">Property</span><span style="color: #0000ff;">="ListBoxItem.Background"</span><span style="color: #ff0000;"> Value</span><span style="color: #0000ff;">="YellowGreen"</span><span style="color: #0000ff;">/&gt;</span><span style="color: #000000;"><br>        </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">Trigger</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>    </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">Style.Triggers</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br></span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">Style</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br><br></span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Style </span><span style="color: #ff0000;">x:Key</span><span style="color: #0000ff;">="style2"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>    </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Setter </span><span style="color: #ff0000;">Property</span><span style="color: #0000ff;">="Control.Padding"</span><span style="color: #ff0000;"> Value</span><span style="color: #0000ff;">="0"</span><span style="color: #0000ff;">/&gt;</span><span style="color: #000000;"><br>    </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Setter </span><span style="color: #ff0000;">Property</span><span style="color: #0000ff;">="Control.Background"</span><span style="color: #ff0000;"> Value</span><span style="color: #0000ff;">="Green"</span><span style="color: #0000ff;">/&gt;</span><span style="color: #000000;"><br>    </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Style.Triggers</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>        </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Trigger </span><span style="color: #ff0000;">Property</span><span style="color: #0000ff;">="ListBoxItem.IsSelected"</span><span style="color: #ff0000;"> Value</span><span style="color: #0000ff;">="True"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>            </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">Setter </span><span style="color: #ff0000;">Property</span><span style="color: #0000ff;">="ListBoxItem.Background"</span><span style="color: #ff0000;"> Value</span><span style="color: #0000ff;">="YellowGreen"</span><span style="color: #0000ff;">/&gt;</span><span style="color: #000000;"><br>        </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">Trigger</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br>    </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">Style.Triggers</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;"><br></span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">Style</span><span style="color: #0000ff;">&gt;</span></div></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+</div><div id="MySignature" style="display: block;">一只喜欢烘焙的IT喵星人</div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="https://www.cnblogs.com/CherryGhost/category/301781.html" target="_blank">WPF / Silverlight</a></div>
+<div id="EntryTag">标签: <a href="https://www.cnblogs.com/CherryGhost/tag/wpf/">wpf</a>, <a href="https://www.cnblogs.com/CherryGhost/tag/style/">style</a>, <a href="https://www.cnblogs.com/CherryGhost/tag/.net/">.net</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(2062387,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;d57e3cbf-4453-df11-ba8f-001cf0cd104b&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/CherryGhost/" target="_blank"><img src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/20130618134239.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/CherryGhost/">§ 薄樱 §</a><br>
+            <a href="https://home.cnblogs.com/u/CherryGhost/followees">关注 - 43</a><br>
+            <a href="https://home.cnblogs.com/u/CherryGhost/followers">粉丝 - 139</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;d57e3cbf-4453-df11-ba8f-001cf0cd104b&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(2062387,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">1</span>
+    </div>
+    <div class="buryit" onclick="votePost(2062387,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/27/2059785.html" class="p_n_p_prefix">« </a> 上一篇：<a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/27/2059785.html" title="发布于2011-05-27 12:59">使用jquery实现权限添加的效果</a><br><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/30/2063006.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/30/2063006.html" title="发布于2011-05-30 09:31">网站用户体验要点（翻译理论）</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2011-05-29 22:30</span> <a href="https://www.cnblogs.com/CherryGhost/">§ 薄樱 §</a> 阅读(<span id="post_view_count">4335</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2062387" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/29/2062387.html#" onclick="AddToWz(2062387);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=89833,cb_entryId=2062387,cb_blogApp=currentBlogApp,cb_blogUserGuid='d57e3cbf-4453-df11-ba8f-001cf0cd104b',cb_entryCreatedDate='2011/5/29 22:30:00';loadViewCount(cb_entryId);var cb_postType=1;var isMarkdown=false;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/29/2062387.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/29/2062387.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-工控&#39;)">【推荐】超50万C++/C#源码: 大型实时仿真组态图形源码</a><br><a href="https://ke.qq.com/adActivity.html?name=xiangxueketang2" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-享学&#39;)">【推荐】Java工作两年，一天竟收到33份面试通知</a><br><a href="https://q.cnblogs.com/" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-博问&#39;)">【推荐】程序员问答平台，解决您开发中遇到的技术难题</a><br></div>
+<div id="opt_under_post"></div>
+<script async="async" src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/gpt.js.下载"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+<script>
+  googletag.cmd.push(function() {
+        googletag.defineSlot('/1090369/C1', [300, 250], 'div-gpt-ad-1546353474406-0').addService(googletag.pubads());
+        googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+  });
+</script>
+<div id="cnblogs_c1" class="c_ad_block">
+    <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;" data-google-query-id="CKf8uYm7v-ICFc4YvAodp0UN2A"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="1" data-load-complete="true" src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/saved_resource.html"></iframe></div></div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>相关博文：</b><br>·  <a href="https://www.cnblogs.com/sjqq/p/8378430.html" target="_blank" onclick="clickRecomItmem(8378430)">WPF数据模板样式选择器</a><br>·  <a href="https://www.cnblogs.com/ssvip/p/10066252.html" target="_blank" onclick="clickRecomItmem(10066252)">ItemsControl绑定的数据模板显示不同样式：模板选择器</a><br>·  <a href="https://www.cnblogs.com/ListenFly/archive/2013/04/16/3011126.html" target="_blank" onclick="clickRecomItmem(3011126)">WPF之样式和控件模板</a><br>·  <a href="https://www.cnblogs.com/xiurui12345/archive/2012/06/04/2534505.html" target="_blank" onclick="clickRecomItmem(2534505)">WPF样式（Style）与模板（Template）</a><br>·  <a href="https://www.cnblogs.com/shuang121/archive/2013/01/14/2860455.html" target="_blank" onclick="clickRecomItmem(2860455)">WPF 样式的应用</a><br></div></div>
+<div id="cnblogs_c2" class="c_ad_block">
+    <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;" data-google-query-id="CKj8uYm7v-ICFc4YvAodp0UN2A"><div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C2_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="2" data-load-complete="true" src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/saved_resource(1).html"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block"><b>最新新闻</b>：<br> ·  <a href="https://news.cnblogs.com/n/626040/" target="_blank">我自主核软件“超级蒙卡”云智能版发布</a><br> ·  <a href="https://news.cnblogs.com/n/626039/" target="_blank">嫦娥四号着陆器、玉兔二号月球车今日自主唤醒，进入第六月昼工作</a><br> ·  <a href="https://news.cnblogs.com/n/626038/" target="_blank">任正非历次谈5G：5G有价值 但现在对5G还没有太迫切的需要</a><br> ·  <a href="https://news.cnblogs.com/n/626037/" target="_blank">国产3nm半导体工艺又刷屏了 先别沸腾了：量产还需多年</a><br> ·  <a href="https://news.cnblogs.com/n/626036/" target="_blank">谷歌临时工数量超出正式员工 令业界不安</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+ if(enablePostBottom()) {
+    codeHighlight();
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverT2();
+    deliverC1();
+    deliverC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);  
+}
+</script>
+</div>
+
+    
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/CherryGhost/">§ 薄樱 §</a><br>园龄：<a href="https://home.cnblogs.com/u/CherryGhost/" title="入园时间：2010-04-29">9年1个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/CherryGhost/followers/">139</a><br>关注：<a href="https://home.cnblogs.com/u/CherryGhost/followees/">43</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;d57e3cbf-4453-df11-ba8f-001cf0cd104b&#39;)">+加关注</a></div><script>getFollowStatus('d57e3cbf-4453-df11-ba8f-001cf0cd104b')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2011/04/01&#39;);return false;">&lt;</a></td><td align="center">2011年5月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2011/06/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">24</td><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td></tr><tr><td class="CalWeekendDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td class="CalWeekendDay" align="center">7</td></tr><tr><td class="CalWeekendDay" align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td class="CalWeekendDay" align="center">14</td></tr><tr><td class="CalWeekendDay" align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td class="CalWeekendDay" align="center">21</td></tr><tr><td class="CalWeekendDay" align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/26.html"><u>26</u></a></td><td align="center"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/27.html"><u>27</u></a></td><td class="CalWeekendDay" align="center">28</td></tr><tr><td class="CalWeekendDay" align="center"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/29.html"><u>29</u></a></td><td align="center"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/30.html"><u>30</u></a></td><td align="center"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/31.html"><u>31</u></a></td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/CherryGhost/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="https://www.cnblogs.com/CherryGhost/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="https://www.cnblogs.com/CherryGhost/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="https://www.cnblogs.com/CherryGhost/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="https://www.cnblogs.com/CherryGhost/tag/" title="我的博客的标签列表">我的标签</a></li>
+<li><a id="itemListLink" onclick="this.blur();WarpClass(&#39;itemListLink&#39;, &#39;itemListLin_con&#39;);return false;" href="https://www.cnblogs.com/CherryGhost/archive/2011/05/29/2062387.html#">更多链接</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/CherryGhost/tag/html/">html</a>(15)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/css/">css</a>(14)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/javascript/">javascript</a>(9)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/jquery/">jquery</a>(8)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/div/">div</a>(7)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/%E8%AE%BE%E8%AE%A1/">设计</a>(5)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/UI/">UI</a>(5)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/html5/">html5</a>(4)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/UI%20Design/">UI Design</a>(3)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/js/">js</a>(2)</li><li><a href="https://www.cnblogs.com/CherryGhost/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(49)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/CherryGhost/category/301777.html">css / css3(10)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/CherryGhost/category/301778.html">html / html5(9)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/CherryGhost/category/301779.html">javascript / jquery(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/CherryGhost/category/301786.html">My Pictures(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="https://www.cnblogs.com/CherryGhost/category/301787.html">other(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="https://www.cnblogs.com/CherryGhost/category/1030078.html">react &amp; reactnative</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="https://www.cnblogs.com/CherryGhost/category/320312.html">React Native</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="https://www.cnblogs.com/CherryGhost/category/301782.html">UI Design(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="https://www.cnblogs.com/CherryGhost/category/301781.html">WPF / Silverlight(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="https://www.cnblogs.com/CherryGhost/category/301784.html">猫猫(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="https://www.cnblogs.com/CherryGhost/category/301785.html">心情(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="https://www.cnblogs.com/CherryGhost/category/301783.html">欣赏(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="https://www.cnblogs.com/CherryGhost/category/301788.html">转载(4)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案<span style="font-size:11px;font-weight:normal">(29)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="https://www.cnblogs.com/CherryGhost/archive/2018/08.html">2018年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="https://www.cnblogs.com/CherryGhost/archive/2017/07.html">2017年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="https://www.cnblogs.com/CherryGhost/archive/2016/09.html">2016年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="https://www.cnblogs.com/CherryGhost/archive/2014/02.html">2014年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="https://www.cnblogs.com/CherryGhost/archive/2013/01.html">2013年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="https://www.cnblogs.com/CherryGhost/archive/2012/04.html">2012年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="https://www.cnblogs.com/CherryGhost/archive/2011/09.html">2011年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="https://www.cnblogs.com/CherryGhost/archive/2011/08.html">2011年8月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="https://www.cnblogs.com/CherryGhost/archive/2011/07.html">2011年7月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="https://www.cnblogs.com/CherryGhost/archive/2011/06.html">2011年6月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="https://www.cnblogs.com/CherryGhost/archive/2011/05.html">2011年5月 (7)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListArticleCategory">
+<h3 class="catListTitle">文章分类<span style="font-size:11px;font-weight:normal">(1)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="https://www.cnblogs.com/CherryGhost/category/302028.html">other</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_1" href="https://www.cnblogs.com/CherryGhost/category/302026.html">翻译资料</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_2" href="https://www.cnblogs.com/CherryGhost/category/302024.html">分享(1)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_3" href="https://www.cnblogs.com/CherryGhost/category/302025.html">猫猫</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_4" href="https://www.cnblogs.com/CherryGhost/category/302027.html">欣赏</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	51605
+	</li><li class="liRank">
+		排名 -	11140
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/07/26/2117397.html#3332383">1. Re:两种自定义html滚动条</a></li>
+        <li class="recent_comment_body">能给出对应的html文件吗</li>
+        <li class="recent_comment_author">--暖暖姜gary君</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/09/2076577.html#3327908">2. Re:支持Html5的Jquery表单验证</a></li>
+        <li class="recent_comment_body">它支持加动画效果不？？</li>
+        <li class="recent_comment_author">--我_爱编程</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/09/2076577.html#3327906">3. Re:支持Html5的Jquery表单验证</a></li>
+        <li class="recent_comment_body">楼主的篇，够实用，够精华，大爱！</li>
+        <li class="recent_comment_author">--我_爱编程</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/07/26/2117397.html#3176093">4. Re:两种自定义html滚动条</a></li>
+        <li class="recent_comment_body">你上面不是说7个图片  url怎么就出现一次呢  还有引用样式的时候就在div上class="dumascroll "这个就行了吗</li>
+        <li class="recent_comment_author">--anderson_net</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/CherryGhost/archive/2011/07/26/2117397.html#3167307">5. Re:两种自定义html滚动条</a></li>
+        <li class="recent_comment_body">这js看起来好恶心，哈哈</li>
+        <li class="recent_comment_author">--paxster</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/07/26/2117397.html">1. 两种自定义html滚动条(19693)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/08/31/2160668.html">2. jQuery中html()方法产生的问题(12583)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/09/2076577.html">3. 支持Html5的Jquery表单验证(11377)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/09/29/2195451.html">4. px和em的战争(7929)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/p/3543299.html">5. 【转】IE11的变化(7761)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/22/2086717.html">6. 30个你不可不知的CSS选择器(7264)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/29/2062387.html">7. WPF数据模板样式选择器(4335)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/08/19/2144944.html">8. position四个属性值的关系(3886)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/p/5829783.html">9. 【转】40条常见的移动端Web页面问题解决方案(3453)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/07/2074083.html">10. .net系统颜色对照图(2418)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/08/19/2144944.html">1. position四个属性值的关系(22)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/08/31/2160668.html">2. jQuery中html()方法产生的问题(20)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2012/04/16/2451862.html">3. 仿得微博字符限制效果(18)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/09/29/2195451.html">4. px和em的战争(14)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/08/15/2139712.html">5. yyyy-mm-dd的正则表达式(10)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/07/26/2117397.html">6. 两种自定义html滚动条(10)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/26/2059078.html">7. 去掉checkbox边框的方法(10)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/07/06/2099314.html">8. 第一次做手机UI。。(9)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/22/2086717.html">9. 30个你不可不知的CSS选择器(7)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/09/2076577.html">10. 支持Html5的Jquery表单验证(7)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/08/31/2160668.html">1. jQuery中html()方法产生的问题(6)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/08/19/2144944.html">2. position四个属性值的关系(6)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2012/04/16/2451862.html">3. 仿得微博字符限制效果(3)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/09/29/2195451.html">4. px和em的战争(3)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/30/2094773.html">5. 猫猫宝宝(2)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/22/2086717.html">6. 30个你不可不知的CSS选择器(2)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/06/09/2076577.html">7. 支持Html5的Jquery表单验证(2)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/05/31/2064190.html">8. jquery鼠标跟随框~(2)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2011/07/26/2117397.html">9. 两种自定义html滚动条(2)</a></li><li><a href="https://www.cnblogs.com/CherryGhost/archive/2013/01/23/2874040.html">10. 一些js代码，自己备用的。高手不要笑话我。。（跨浏览器基础事件，浏览器检测，判断浏览器的名称、版本号、操作系统）(2)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2019 § 薄樱 §
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+<!--PageEndHtml Block Begin-->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8070c944220724a387a9e107330faf09' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/h.js.下载" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=8070c944220724a387a9e107330faf09" target="_blank"><img border="0" src="./WPF数据模板样式选择器 - § 薄樱 § - 博客园_files/21.gif" width="20" height="20"></a>
+<!--PageEndHtml Block End-->
+
+
+</body></html>
