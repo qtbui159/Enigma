@@ -1,0 +1,24 @@
+如何打印异常方法的参数信息
+
+利用Exception类本身的一个字段Data，这个字段被大多数人遗漏，实际上他还是能保存不少有用的信息
+拿到这些信息就可以输出到日志了
+
+public static string Stringify(object obj)   
+{
+    // json化obj 得到字符串
+}
+
+public static void Failure(int a, string b, Entity entity)
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                ex.Data.Add(nameof(a), a.ToString());
+                ex.Data.Add(nameof(b), b);
+                ex.Data.Add(nameof(entity), Stringify(entity));
+                LogUtils.Error(ex);
+            }
+        }

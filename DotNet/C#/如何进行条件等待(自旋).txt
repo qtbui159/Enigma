@@ -1,0 +1,25 @@
+如何进行条件等待(自旋)
+
+经常会遇到需要不断测试一个条件是否成立的情况，实现的手段多种多样，可以用信号量通知等同步手段
+当然也有人手写过自旋代码，伪代码如下
+
+DateTime startTime=Now;
+bool flag=false; //这里的flag由其他方法来改变
+bool timeout=true; //判断是否超时
+
+while( (Now-startTime)<1000ms )
+{
+    Thread.Sleep(20);
+    if(flag)
+    {
+         timeout=false;
+         break;
+    }
+}
+
+这里的场景则是， 需要在超时1秒的时间内等待一个变量改变，最后来判断这个变量是否成功的被改变或者超时
+
+实际上 自旋的这种测试，官方是提供了一个超低cpu占用的方法，而且性能远好于Thread.Sleep，因为自旋和Sleep不一样，Sleep会使线程挂起并且有线程上下文切换开销
+
+SpinWait.SpinUntil(()=>flag); //一直等待flag变为true为止
+bool wait=SpinWait.SpinUntil(()=>flag,1000); //超时时间1000
