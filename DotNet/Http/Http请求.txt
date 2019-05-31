@@ -1,0 +1,279 @@
+Http请求这个问题比较割裂，需要根据版本来谈
+
+还有一个问题是 这里面所有的请求，默认都是开启了代理的(IE中的代理设置)，所以如果不关闭代理，那么第一次请求会非常非常慢(根据本地设置，一般是7-16秒的样子)，他会等待代理超时后再用本地资源去请求远端。不需要就关闭代理
+
+1. .Net Framework(version<4.5)
+
+小于4.5的平台上选用HttpWebRequest来实现是一个很好的选择，并且也没啥特别大的问题，唯一需要头疼的就是关于超时的问题，因为就算设置了超时之后，也不是完全按照这个超时时间来的，最后会给出我平常使用的代码
+
+2. .Net Framwork(4.5<=version<4.6.1) 或者 .Net Core (version<2.1)
+
+这里有一个更好的选择是使用HttpClient来完成各种请求，而且这个类大多数时候也很好用，但是他被人诟病的是他隐含的2个问题
+网站里面有比较完整的问题展示，https://www.oschina.net/news/77036/httpclient
+一个是资源释放问题，一个是不遵守DNS的生存时间(即会以第一次dns解析到的ip作为该域名的ip，假设重新未重启过，那么对应的域名换了ip那也还是按旧ip去请求)
+
+那么 第一个资源释放的问题 这个目前只能使用静态变量来解决
+存一个 private static HttpClient Client=new HttpClient() 即可，其余的请求都使用这个实例
+第二个问题暂时无法解决，如果有dns变更需求的可以使用 方式1(HttpWebRequest)
+
+3. .Net Framework(version>=4.6.1) 或者 .Net Core(version>=2.1)
+
+微软针对HttpClient的问题进行了收集和更新，但是并不是直接对 HttpClient进行了bug fix，所以即使在这个版本下的HttpClient仍然会面临上面说的问题。
+
+这里微软采用的新的解决方案是添加了一个类 HttpClientFactory，使用这个工厂类来解决上述的问题
+
+
+下面是代码
+
+1.HttpWebRequest
+
+public class HttpUtils
+    {
+        public static string BaseUrl { private set; get; } //基址
+        public static TimeSpan Timeout { private set; get; } //超时时间
+
+        static HttpUtils()
+        {
+        }
+
+        public static void SetBaseUrl(string s)
+        {
+            BaseUrl = s;
+        }
+
+        public static void SetTimeout(TimeSpan timeOut)
+        {
+            Timeout = timeOut;
+        }
+
+        /// <summary>
+        /// 当发生异常的时候返回null
+        /// </summary>
+        /// <param name="api"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static string Get(string api, Dictionary<string, string> param)
+        {
+            string strURL = MakeFinalReqeust(api, param);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
+            HttpWebResponse response = null;
+            try
+            {
+                request.Method = "GET";
+                request.Proxy = null; //关闭代理
+                request.KeepAlive = false;
+                request.Timeout = request.ReadWriteTimeout = int.Parse(Timeout.TotalMilliseconds.ToString());
+                response = (HttpWebResponse)request.GetResponse();
+                StreamReader myreader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                string responseText = myreader.ReadToEnd();
+                myreader.Close();
+                myreader.Dispose();
+                return responseText;
+            }
+            catch (Exception ex)
+            {
+                LoggerUtils.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                if (response != null)
+                {
+                    response.Close();
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 带超时的版本,当发生异常的时候返回null
+        /// </summary>
+        /// <param name="api"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static string Get(string api, Dictionary<string, string> param, ref bool isTimeout)
+        {
+            string strURL = MakeFinalReqeust(api, param);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
+            HttpWebResponse response = null;
+
+            isTimeout = false;
+
+            try
+            {
+                request.Method = "GET";
+                request.Proxy = null; //关闭代理
+                request.KeepAlive = false;
+                request.Timeout = request.ReadWriteTimeout = int.Parse(Timeout.TotalMilliseconds.ToString());
+                response = (HttpWebResponse)request.GetResponse();
+                StreamReader myreader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                string responseText = myreader.ReadToEnd();
+                myreader.Close();
+                myreader.Dispose();
+                return responseText;
+            }
+            catch (Exception ex)
+            {
+                if (ex != null && ex.GetType() == typeof(WebException))
+                {
+                    WebException wex = ex as WebException;
+                    if (wex.Status == WebExceptionStatus.Timeout)
+                    {
+                        isTimeout = true;
+                    }
+                }
+
+                LoggerUtils.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                if (response != null)
+                {
+                    response.Close();
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 发生异常的时候返回null
+        /// </summary>
+        /// <param name="api"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static string Post(string api, Dictionary<string,string> param)
+        {
+            string strURL = GetAbsoluteUrl(api);
+            HttpWebResponse myResponse = null;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(strURL);
+            StreamReader reader = null;
+            try
+            {
+                UTF8Encoding encoding = new UTF8Encoding();
+                byte[] data = encoding.GetBytes(GetStringBuilderData(param));
+
+                request.Proxy = null; //关闭代理
+                request.Timeout = request.ReadWriteTimeout = int.Parse(Timeout.TotalMilliseconds.ToString());
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = data.Length;
+                Stream myStream = request.GetRequestStream();
+                myStream.Write(data, 0, data.Length);
+
+                myResponse = (HttpWebResponse)request.GetResponse();
+                reader = new StreamReader(myResponse.GetResponseStream(), Encoding.UTF8);
+                string content = reader.ReadToEnd();
+                return content;
+            }
+            catch (Exception ex)
+            {
+                LoggerUtils.WriteLine(ex);
+                return null;
+            }
+            finally
+            {
+                if (myResponse != null)
+                {
+                    myResponse.Close();
+                }
+                if (reader != null)
+                {
+                    reader.Close();
+                    reader.Dispose();
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                }
+            }
+        }
+
+        private static string GetStringBuilderData(Dictionary<string, string> param)
+        {
+            StringBuilder buffer = new StringBuilder();
+            if (param == null || param.Count == 0)
+            {
+                return "";
+            }
+            string i = "";
+            foreach (var item in param)
+            {
+                buffer.AppendFormat("{0}{1}={2}", i, item.Key, item.Value);
+                i = "&";
+            }
+            return buffer.ToString();
+        }
+
+        private static string MakeFinalReqeust(string apiPath, Dictionary<string, string> param)
+        {
+            string finalUrl = GetAbsoluteUrl(apiPath);
+
+            if (param == null || param.Count == 0)
+            {
+                return finalUrl;
+            }
+
+            if (!finalUrl.EndsWith("?"))
+            {
+                finalUrl += "?";
+            }
+
+            string contractChar = "&";
+            for (int i = 0; i < param.Count; ++i)
+            {
+                if (i == param.Count - 1)
+                {
+                    contractChar = "";
+                }
+
+                finalUrl += string.Format("{0}={1}{2}", param.ElementAt(i).Key, param.ElementAt(i).Value, contractChar);
+            }
+
+            return finalUrl;
+        }
+
+        private static string GetAbsoluteUrl(string apiPath)
+        {
+            string result = BaseUrl.Replace(@"\", @"/");
+            if (!result.EndsWith(@"/"))
+            {
+                result += @"/";
+            }
+
+            apiPath = apiPath.Replace(@"\", @"/");
+            apiPath = apiPath.TrimStart(new char[] { '/' });
+            return result + apiPath;
+        }
+}
+
+2.HttpClient
+
+HttpClientHandler httpClientHandler = new HttpClientHandler();
+httpClientHandler.UseProxy = false; //关闭代理
+HttpClient httpClient = new HttpClient(httpClientHandler);
+httpClient.Timeout = TimeSpan.FromSeconds(3); //3秒超时
+
+3.HttpClientFactory
+
+先使用Nuget安装2个包 Microsoft.Extensions.Http和Microsoft.Extensions.DependencyInjection
+
+//初始化代码
+const string MY_HTTP_CLIENT=nameof(MY_HTTP_CLIENT);
+ServiceCollection service = new ServiceCollection();
+service.AddHttpClient(MY_HTTP_CLIENT, (r) => { }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
+{
+	UseProxy = false, //关闭代理
+});
+ServiceProvider m_ServiceProvider = service.BuildServiceProvider();
+IHttpClientFactory httpClientFactory = m_ServiceProvider.GetService<IHttpClientFactory>();
+
+//使用
+HttpClient httpClient = httpClientFactory.CreateClient(MY_HTTP_CLIENT);
+httpClient.Timeout=TimeSpan.FromSeconds(3); //3秒超时
