@@ -1,14 +1,11 @@
-防止内存泄露
+﻿防止内存泄露
 
 2019/5/30晚上记录，防止WPF程序的内存泄露，有几个需要注意的地方
 
 1.ViewModel和ObservableCollection<T>，VM和T必须要实现INotifyPropertyChanged接口，否则会内存泄露
 不过这条我没有验证过，在stackoverflow上看到一部分人说的，没有实际测试过
 
-2.ObservableCollection的清空和批量添加、销毁
-清空直接赋值为null，批量添加直接使用构造函数，在Unloaded中对集合进行清空(赋值null)
-
-3.wpf中，Image所绑定的图片是不会释放的，如果你有一个Image控件，并且里面再不停的换图，这时候就会引发内存泄露
+2.wpf中，Image所绑定的图片是不会释放的，如果你有一个Image控件，并且里面再不停的换图，这时候就会引发内存泄露
 如果要实现换图的功能，使用转换器，将绑定的字符串转换为BitmapImage对象
 
 BitmapImage bitmapImage = new BitmapImage();
@@ -20,7 +17,7 @@ bitmapImage.UriSource = new Uri("图片绝对地址或相对地址");
 bitmapImage.EndInit();
 bitmapImage.Freeze();
 
-4.特别针对Prism，如果会用到导航，那么需要清除历史记录
+3.特别针对Prism，如果会用到导航，那么需要清除历史记录
 public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             ProductList = null;
