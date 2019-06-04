@@ -1,0 +1,23 @@
+判断文字是否能显示完整
+
+//以下代码可以将TextBox替换成能承载文字显示的Control，如TextBlock也适用
+
+public bool IsTextTrimmed(TextBox textbox)
+        {
+            Typeface typeface = new Typeface(
+                textbox.FontFamily,
+                textbox.FontStyle,
+                textbox.FontWeight,
+                textbox.FontStretch);
+
+            FormattedText formattedText = new FormattedText(
+                textbox.Text,
+                System.Threading.Thread.CurrentThread.CurrentCulture,
+                textbox.FlowDirection,
+                typeface,
+                textbox.FontSize,
+                textbox.Foreground);
+
+            bool isTrimmed = formattedText.Width > textbox.Width;
+            return isTrimmed;
+        }
