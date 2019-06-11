@@ -1,4 +1,4 @@
-经常需要用到多返回值的方法，在老版本中可以通过ref，out，数组，或者包装成class,struct来解决，也可以通过tuple来解决，不过不够直观
+﻿经常需要用到多返回值的方法，在老版本中可以通过ref，out，数组，或者包装成class,struct来解决，也可以通过tuple来解决，不过不够直观
 
 C#7新增了一个ValueTuple用于返回多返回值，用法也很简单，找一个支持C#7语法的IDE(vs2017,vs2019)
 保证 version>=.net framework 4.5 或者 version>=.net core 2.0即可
@@ -17,3 +17,7 @@ public (int Code, string Msg) ReturnMultiValue()
 var val=ReturnMultiValue();
 int code=val.Code;
 string msg=val.Msg;
+
+或者 利用 析构模式
+
+(int code, string msg)=ReturnMultiValue();
