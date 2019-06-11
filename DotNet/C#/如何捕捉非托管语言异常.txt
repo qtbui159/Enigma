@@ -1,0 +1,16 @@
+如何捕捉非托管语言异常
+
+如果遇到调用dll(native)的异常，比如dll中自己计算除0的异常，普通的Exception是无法捕捉该异常的
+
+try
+{
+    shit.TestThrow();
+}
+catch (RuntimeWrappedException e)
+{
+    String s = e.WrappedException as String;
+    if (s != null)
+    {
+        Console.WriteLine(s);
+    }
+}
