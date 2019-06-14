@@ -1,0 +1,70 @@
+如何调用父类事件
+
+利用反射找到事件，然后进行调用
+
+
+class A : INotifyPropertyChanged 
+{
+	public event PropertyChangedEventHandler PropertyChanged;
+	public A() 
+	{
+	}
+}
+class B : A 
+{
+	public string Value 
+	{
+		get;
+		set;
+	}
+	B() 
+	{
+		FieldInfo fieldInfo = FindEvent(typeof(B), nameof(INotifyPropertyChanged.PropertyChanged));
+		if (fieldInfo == null) 
+		{
+			throw new Exception("event not found");
+		}
+		InvokeEvent(fieldInfo, this, new object[] 
+		{
+			this, new PropertyChangedEventArgs(nameof(Value))
+		}
+		);
+	}
+	private static FieldInfo FindEvent(Type type, string eventName) 
+	{
+		if (string.IsNullOrWhiteSpace(eventName)) 
+		{
+			return null;
+		}
+		if (type == null) 
+		{
+			return null;
+		}
+		Type endType = typeof(object);
+		Type nowType = type;
+		FieldInfo fieldInfo = null;
+		while (nowType != endType) 
+		{
+			fieldInfo = nowType.GetField(eventName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+			if (fieldInfo != null) 
+			{
+				break;
+			}
+			nowType = nowType.BaseType;
+		}
+		return fieldInfo;
+	}
+	private static void InvokeEvent(FieldInfo fieldInfo, object instance, params object[] param) 
+	{
+		MulticastDelegate eventDelegate = fieldInfo.GetValue(instance) as MulticastDelegate;
+		if (eventDelegate == null) 
+		{
+			//没绑定任何事件
+			return;
+		}
+		foreach (var x in eventDelegate.GetInvocationList()) 
+		{
+			x.Method.Invoke(x.Target, param);
+		}
+	}
+}
