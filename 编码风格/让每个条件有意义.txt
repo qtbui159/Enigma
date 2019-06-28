@@ -1,0 +1,38 @@
+经常会遇到这样的代码，假设我要测试一个文件是否是jpg图片（这里就直接判断后缀是jpg就行了）
+
+if(fileName.EndsWith(".jpg"))
+{
+    do some works...  
+} 
+
+
+建议用一些简单的封装让 每个测试条件都变的有意义，用于改善可读性
+
+
+如下
+
+方法1，提供工具类方法
+
+bool IsFileJpg(string fileName)
+{
+    const string JPG_SUFFIX=".jpg";
+    if(fileName==null}
+    {
+        throw new Exception(..);
+    }
+    
+    return fileName.EndsWith(JPG_SUFFIX);
+}
+
+if(IsFileJpg(fileName))
+{
+     do some works...
+}
+
+方法2，该方法设计到领域知识，直接封进类里面
+
+JpgFile jpgFile=new JpgFile(fileName);
+if(jpgFile.IsValid())
+{
+    do some works...
+}

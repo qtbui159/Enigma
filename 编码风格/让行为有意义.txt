@@ -1,0 +1,57 @@
+目前做这个收银系统，碰到太多的数字上的运算，但是摆个乘法在那里真的过2个星期就忘完了
+等下次重构的时候准备让行为更符合DDD的思想
+
+我现在经常遇到的一个场景，A类商品打5折,B类商品打7折，C类商品打95折
+
+以前的伪代码
+
+Money payMoney=new Money(100.0); //商品100元
+double discount=1;
+
+if(type==A)
+{
+   discount=0.5;
+}
+else if(type==B)
+{
+   discount=0.7;
+}
+else if(type==C)
+{
+   discount=0.95;
+}
+
+payMoney=payMoney*discount;
+
+这是很明显的面向过程的一个写法
+
+
+用ddd的思想来重构的话，即钱和打折都是你领域中的不同的东西，就应该对他们进行建模，并且对建模的命名意义进行约束
+打折可以很简单的看成一个规则，那么重构可以搞成如下形式
+
+interface IDiscountRule
+{
+     public abstract Money Discount(Money money);
+}
+
+//根据商品类型而来的打折规则
+class ProductTypeDiscountRule : IDiscountRule
+{
+    public Money Discount(Money money,Type productType)
+    {
+         //干的事情和最上面的伪代码相同即可，当然也可进一部分封装
+    }
+}
+
+//同理可以依法炮制 会员日的打折规则，或者折上折等
+
+如何创建打折规则呢，在DDD里面最常用的是工厂设计模式
+那么重构代码就仅为下面两句
+
+IDiscountRule rule=DiscountRule.CreateInstance(DiscountRule.FromProductType);
+Money offMoney=rule.Discount(money,商品类型);
+
+虽然只是简单的封装了一下，但是 业务语言就比上面明显很多，哪怕是第一次接触这个业务的人
+也可以很清晰的看出通用语言，即
+
+根据商品类型进行对应折扣

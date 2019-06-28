@@ -1,0 +1,31 @@
+总会遇到一抹多条件组合的情况 然后让大括号嵌套无数次
+
+if(conditionA)
+{
+     if(conditionB)
+     {
+           if(conditionC)
+           {
+               do some works...
+           }
+     }
+}
+
+善用阻断式编程来改善缩进和代码的可读性
+
+if(!conditionA)
+{
+    return;
+}
+
+if(!conditionB)
+{
+    return;
+}
+
+if(!conditionC)
+{
+    return;
+}
+
+do some works...
