@@ -1,1 +1,34 @@
-��ǰ�ı�������ÿ��
+﻿以前的编码风格建议每个需要复用的字面值都用有意义的名字保存起来，不过最近我看的一些比较优秀的项目，
+不管是复用还是单用，都是好好的使用他的名字来指代他的值
+
+像一个很简单的场景，充值每次充100块
+
+public int Charge(int value)
+{
+    return value+100;
+}
+
+那么这个100也可以用有意义的字符来修饰，哪怕只用在这一个地方
+
+public int Charge(int value)
+{
+    const int DEFAULT_CHARGE_VALUE=100; //const限定不可修改
+    return value+DEFAULT_CHARGE_VALUE;
+}
+
+
+再像下面一个场景
+
+//加上人民币单位
+public string AddRMBUnit(string value)
+{
+     return value+"¥";
+}
+
+替换为如下代码
+
+public string AddRMBUnit(string value)
+{
+     const string RMB_UNIT="¥";
+     return value+RMB_UNIT;
+}
