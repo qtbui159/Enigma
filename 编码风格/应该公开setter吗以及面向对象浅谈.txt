@@ -1,0 +1,67 @@
+这段时间，我花了大量的时间去探究现代面向对象编程应该如何做，收获如下
+
+从 jawa/c#/c++ 那个setter的用法说起，这是最先的思考
+
+最简单的一个场景，启用和停用账户
+
+User user=userDao.findById(123);
+user.setStatus(1); //启用
+userDao.Save(user); //保存到数据库
+
+很简单的代码完成了启用账户，功能实现OK，测试OK，那么观察可读性好像也还好
+那么面向对象呢？ 以下用c语言做一个同样的功能，都知道c是面向过程的
+
+User user=user_FindById(123);
+setStatus(user,1);
+saveUser(user);
+
+是不是他们从代码上几乎是一致的，那所以面向对象，这个对象的本身行为被封装了吗
+并没有，他只是有一个setter来做赋值操作而已罢了，其实就是面向过程+面向数据库在编程，
+所以并不是使用的是面向对象语言，思想就是面向对象的
+
+先解释几个词 OOP（面向对象编程） POP（面向过程编程）DOP（面向数据编程）
+
+网上大量的编程实践，充斥着 DOP+POP 的味道，虽然他们使用的是OOP的语言
+
+如何使用OOP来改善上面的例子，
+很简单，setter可以有，但是private就行了
+
+class User
+{
+     public int Status;
+
+     public void Active(){  Status=1;}
+     public void Deactive() {Status=0;}
+     public bool IsActive(){return Staus==1;}
+}
+
+那么他自己的方法名就能体现这个业务是干嘛勒咯
+
+再来举个我印象中很深的例子，场景如下，一个护士给一个病人打针
+1.用DOP+POP
+patient.setShotType(ShotTypes.Anti_Fever); //设置类型 退烧药
+patient.setDose(1); //设置计量1
+patient.setNurse(nurse); //设置打针的护士
+
+ShotHistory sh=new ShotHistory(nurse,patient,1,ShotTypes.Anti_Fever);
+
+shotHistoryDai.Save(patient); // 将打针历史保存了
+
+2.用OOP
+Anti_Fever af=new Anti_Fever(new Dose(1));
+nurse.giveShot(patient,af); 
+
+ShotHistory sh=new ShotHistory(nurse,patient,af);
+shotHistoryDao.Save(sh);
+
+哪个代码的业务表述更清楚，一目了然吧
+
+所以 setter可以用，但是不一定每个setter都需要公开，公开的应该是更能体现业务的方法
+当然像 setId 这种 好像也没更好的来代替，他公开setter就没啥的
+
+而且这样设计更简单，也很好读，就比如改密码
+
+user.setPassword(newPassword);
+
+user.changePassword(newPassword); 
+哪个更能体现场景相信也不用我多说了
