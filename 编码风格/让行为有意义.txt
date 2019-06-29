@@ -31,7 +31,7 @@ payMoney=payMoney*discount;
 
 interface IDiscountRule
 {
-     public abstract Money Discount(Money money);
+     Money Discount(Money money);
 }
 
 //根据商品类型而来的打折规则
@@ -51,7 +51,7 @@ class ProductTypeDiscountRule : IDiscountRule
 IDiscountRule rule=DiscountRule.CreateInstance(DiscountRule.FromProductType);
 Money offMoney=rule.Discount(money,商品类型);
 
-虽然只是简单的封装了一下，但是 业务语言就比上面明显很多，哪怕是第一次接触这个业务的人
-也可以很清晰的看出通用语言，即
+虽然只是简单的封装了一下，但是 业务语言就比上面清晰很多，哪怕是第一次接触这个业务的人
+也可以很明白的看出通用语言，即
 
 根据商品类型进行对应折扣
