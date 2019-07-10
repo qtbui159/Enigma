@@ -1,0 +1,22 @@
+在新版(7.2及以上)的语法中，增加了一个参数修饰符in，我一直想有一个c++那种对参数做const限制的，现在终于有了
+
+public void func(int a)
+{
+     //如果要在这个子程序中限制a是不可更改的，以前只有靠自己自觉
+}
+
+修改后如下
+
+public void func(in int a)
+{
+     a=1;// 编译器会直接报错
+}
+
+但是如果变量是引用的情况下，只是对new有限制，其他修改并不会限制
+
+public void func(in List<int> a)
+{
+
+    a=new List<int>(); //报错
+    a.Add(1); //这个是okay的
+}
