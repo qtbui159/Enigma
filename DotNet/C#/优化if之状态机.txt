@@ -1,0 +1,43 @@
+用状态机优化if，因为状态机实现起来较复杂，直接使用现成的一个组件Stateless
+nuget安装下即可
+
+顾名思义，这种优化方式适合于各种状态流转的场景
+
+我简化修改了一下官方例子，让他变的更好理解
+
+//电话状态
+enum PhoneState
+{
+    闲置,
+    响铃,
+    接通,
+}
+
+//电话触发器(动作)
+enum PhoneTrigger
+{
+    拨号,
+    接听,
+    留言,
+    挂断,
+}
+
+//初始化状态机为闲置状态
+StateMachine<PhoneState, PhoneTrigger> phoneMachine = new StateMachine<PhoneState, PhoneTrigger>(PhoneState.闲置);
+
+//Configure配置闲置状态，Permit允许使用拨号动作将状态变为响铃
+phoneMachine.Configure(PhoneState.闲置).Permit(PhoneTrigger.拨号, PhoneState.响铃);
+
+//Configure配置响铃状态，并配置进入该状态调用enter子程序，Permit允许使用接听动作将状态变为接通
+phoneMachine.Configure(PhoneState.响铃).OnEntry(enter).Permit(PhoneTrigger.接听, PhoneState.接通);
+
+//Configure配置接通状态，Permit允许使用留言和挂断动作将状态变为闲置
+phoneMachine.Configure(PhoneState.接通).Permit(PhoneTrigger.留言, PhoneState.闲置)
+                                       .Permit(PhoneTrigger.挂断, PhoneState.闲置);
+
+//使用拨号动作改变现在状态，因为之前只配置了闲置状态可以用该动作改变状态，其余的就会直接异常掉
+phoneMachine.Fire(PhoneTrigger.拨号);
+
+
+
+加上注释的常用代码，好理解也好用，还有一些内置方法，比如改变状态带参数之类的，参考官方github文档即可。

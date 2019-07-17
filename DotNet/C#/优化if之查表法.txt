@@ -1,0 +1,27 @@
+查表法就是利用Key-Value来优化即可，简单的一批
+
+if(a==1)
+{
+     invokeA();
+}
+else if(a==2)
+{
+     invokeB();
+}
+...
+else if(a==30)
+{
+     invokeC();
+}
+
+直接转换为key-value
+
+Dictionary<int,Action> valueMapAction=new xxx;
+
+valueMapAction.Add(1,invokeA);
+valueMapAction.Add(2,invokeB);
+....
+valueMapAction.Add(30,invokeC);
+使用的时候直接
+
+valueMapAction(a).Invoke();即可
