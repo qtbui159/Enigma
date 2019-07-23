@@ -1,0 +1,54 @@
+构造函数应该怎样使用
+
+这个问题比较悬，因为大多数直接使用构造函数的时候，都往往有更好的替代方案，只不过这些方案里面，就属于构造函数本身较为简单
+
+情况1:
+
+比如可乐(Cola)，
+
+Cola cola=new Cola(1); //表示一瓶
+
+实际看上去用起来都没啥问题的，但是就是因为构造函数是无名称的，如果重载多了，容易造成疑惑
+
+Cola cola1=new Cola("1") //从字符串创建
+Cola cola2=new Cola(ColaUnit.One) //从枚举创建
+
+像这种比较简单的多重载构造函数，可以参考一下 各个语言是如何设计的
+
+就拿 jawa和.net的 基础类型 int来说，如果要把 一个 String 转换为int
+
+jawa: int one =Integer.parseInt("1");
+c#: int one=int.Parse("1");
+
+这种是直接利用静态函数来完成丰满语义上的设计，那么那个可乐的例子我们可以做如下修改
+Cola cola=Cola.CreateCount(1);
+或者
+Cola cola=Cola.FromCount(1);
+
+
+情况2:
+
+拥有n个可选参数的构造函数，假设一个类手机，除开必要的东西外，我们提供几个可选配硬件，蓝牙，NFC，指纹仪
+那么这个构造函数设计起来就很蛋痛了
+
+Phone phone=new Phone(蓝牙,NFC,指纹仪);
+
+Phone phone=new Phone(蓝牙,NFC);
+Phone phone=new Phone(NFC,指纹仪);
+Phone phone=new Phone(蓝牙,指纹仪);
+
+Phone phone=new Phone(蓝牙);
+Phone phone=new Phone(NFC);
+Phone phone=new Phone(指纹仪);
+
+大概就像这样，只是3个选配的，就需要提供7个构造函数，而且还必须时刻主要传参的顺序(这个更恶心)
+如果更多参数的话，那恶心程度是难以想象的
+遇到这种可选参数的问题，最合适的也是最多项目选用的方法则是构建者模式(builder模式)
+
+搞一个PhoneBuilder，那么设计可以更改为下面这样
+
+Phone phone=new PhoneBuilder().useBluetooth().useNFC().useFinger().build(); //蓝牙，NFC，指纹仪
+Phone phone=new PhoneBuilder().useNFC().useFinger().build(); //NFC，指纹仪
+
+就像这样，可选参数顺序也好，定制化也好，还是代码可读性，使用便捷性上来说都要好很多
+
