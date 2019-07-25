@@ -1,0 +1,92 @@
+普通计算单元应该如何设计
+
+这里只说下我的经验，计算单元这个概念比较模糊，我大概举例下是些啥东西，比如  单位米，人民币元
+还有各种关系，有些也是属于计算单元，比如  2个向量的垂直关系，亲属关系等
+
+先说下我如何设计 关系 的计算单元
+
+拿亲属关系来说，像这种简单逻辑关系，就可以搞的很简单，一是计算结果，而是记录参数便于回溯即可
+
+比如2个向量的垂直关系，Vector(向量)，Normal(垂直)
+
+class Normal
+{
+    public Vector Vector1;
+    public Vector Vector2;
+
+    public Normal(Vector vector1,Vector vector2)
+    {
+		Vector1=vector1;
+		Vector2=vector2;
+    }
+	
+	public bool Judge()
+	{
+		//用数学方法判断是否垂直即可
+	}
+}
+
+这种简单的主要就强调一个概念，即计算单元能封装的就最好封装起来
+
+
+再举个稍微复杂点儿的例子，像 人民币元(Money或者叫RMB都行)
+以下用Money来举例，因为工作的关系，设计过Money这个类很多次了，我说下的我经验。
+首先对于这个东西，他也是一个计算单元，计算单元就按上面我一贯做的那样，记录下原值，
+Money这东西的原值就是钱的数值，因为一般都是保留到分（小数点后两位小数），
+所以这里我们直接以分来做单位，来避免恶心的转换问题和数据库保存上的问题
+
+class Money
+{
+	private int m_Value; //以分为单位的原值，不暴露给外部
+	
+	//创建实例的2个方法
+	
+	public static Money FromString(string s, MoneyUnit unit)
+	{
+		decimal value=decimal.Parse(s);
+		if(unit==MoneyUnit.元)
+		{
+			value=value*100;
+		}
+		return new Money()
+		{
+			m_Value=(int)value,
+		};
+	}
+	
+	public static Money FromInt(int i, MoneyUnit unit)
+	{
+		if(unit==MoneyUnit.元)
+		{
+			i=i*100;
+		}
+		return new Money()
+		{
+			m_Value=i,
+		};
+	}
+	
+	//封装一切的计算，下面举例几个
+	
+	public bool IsNegative(); //是否是负数
+	public bool IsZero();     //是否是0
+	public bool IsBiggerThan(Money money); //比大小,如果使用的语言支持操作符重载，那么直接重载> < 这些符号即可
+	
+	public Money Add(Money money); //相加,如果使用的语言支持操作符重载，那么直接重载+符号即可
+	
+	//封装取值方法
+	public string GetString(MoneyUnit unit, int digit); //取出文本值，参数1为单位，参数2位需要四舍五入的位置
+	public decimal GetDecimal(MoneyUnit unit,int digit); 
+}
+
+//这里为了演示，只设计2个单位
+enum MoneyUnit
+{
+	元,
+	分,
+}
+
+
+总结一下，就是项目中，要根据自己的经验，去把隐含到后面的计算单元给识别出来，把他需要的方法都给内部封装起来，
+当然最难的其实是识别，这个只有多练习才行了，再自己的项目中，把某种关系，某种计算，某种单位给封装起来，
+慢慢的感觉就训练出来了
