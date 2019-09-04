@@ -1,0 +1,7 @@
+解决触摸屏ShowDialog问题
+
+在实际触摸屏中，除开Button控件的Command，其他控件使用InputBindings会遇到ShowDialog后，弹出窗口第一次点击失灵的问题
+
+解决方法：
+
+所有需要ShowDialog的控件都使用Button来进行重绘，然后绑定相应Command即可
