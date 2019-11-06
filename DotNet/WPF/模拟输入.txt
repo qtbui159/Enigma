@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/1645815/how-can-i-programmatically-generate-keypress-events-in-c
+https://stackoverflow.com/questions/3404560/how-do-i-simulate-text-input-to-a-wpf-textbox
