@@ -1,0 +1,48 @@
+这个情况其实最先我以为是前端的react-router引起的，但是实际不是，给出几种解决办法
+
+1.将BrowserRouter替换为HashRouter实现
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+改为
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+
+2.后台提供重定向功能
+这个可以自己去了解，网上大部分提供的是 django的写法，bing上能搜到spring和asp.net的解决办法
+
+https://www.cnblogs.com/shengulong/p/10321478.html
+
+
+3.服务程序提供重定向功能
+
+3.1 IIS
+IIS默认是不带URL重定向功能的（服务器版未知），安装IIS后需要打上补丁，https://www.iis.net/downloads/microsoft/url-rewrite 下载后安装，然后在页面根目录配置一个web.config，提供重定向配置，内容如下：
+
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <rewrite>
+      <rules>
+        <rule name="Rewrite Text Requests" stopProcessing="true">
+          <match url=".*" />
+          <conditions>
+            <add input="{HTTP_METHOD}" pattern="^GET$" />
+            <add input="{HTTP_ACCEPT}" pattern="^text/html" />
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="/index.html" />
+        </rule>
+      </rules>
+    </rewrite>
+    </system.webServer>
+</configuration>
+
+3.2 Apache
+
+https://blog.csdn.net/hell87/article/details/90410954
+
+3.3 Ngnix
+
+https://www.jianshu.com/p/5e78477bbff2
+
+额外资料：
+https://www.jianshu.com/p/09d6440e625f
+http://www.ki4.cn/99237.html
