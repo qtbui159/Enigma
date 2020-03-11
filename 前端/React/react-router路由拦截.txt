@@ -1,0 +1,27 @@
+路由拦截利用组件的思路去做
+
+import { BrowserRouter as Router ,Route, Redirect,Switch} from 'react-router-dom'
+
+class ProtectedRoute extends React.Component{
+  render(){
+    if(!this.props.isLogin){
+      return <Redirect to="/"></Redirect>
+    }
+    return <Route {...this.props}></Route>
+  }
+}
+
+class App extends React.Component{
+
+  render(){
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home}></Route>
+          <Route path="/view1" component={View1}></Route>
+          <ProtectedRoute path="/view2" component={View2} isLogin={true}></ProtectedRoute>
+        </Switch>
+      </Router>
+    )
+  }
+}
